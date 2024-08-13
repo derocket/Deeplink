@@ -7,10 +7,26 @@
 </head>
 <body>
     <script type="text/javascript">
-        // Redirect to the Android app using the intent URL
-        //https://derocket.github.io/Deeplink/
-        window.location.href = "intent://derocket.github.io/Deeplink/123#Intent;scheme=https;package=com.example.deeplink1;end";
+        // Get the full URL of the current page
+        var fullUrl = window.location.href;
+
+        // Extract the data after "Deeplink/"
+        var deeplinkData = fullUrl.split("Deeplink/")[1];
+
+        // Construct the intent URL with the extracted data
+        if (deeplinkData) {
+            window.location.href = "intent://derocket.github.io/Deeplink/" + deeplinkData + "#Intent;scheme=https;package=com.example.deeplink1;end";
+        } else {
+            // Fallback if no data found after "Deeplink/"
+            window.location.href = "intent://derocket.github.io/Deeplink#Intent;scheme=https;package=com.example.deeplink1;end";
+        }
     </script>
-    <p>If the app doesn't open automatically, <a href="intent://www.abc.com/123#Intent;scheme=https;package=com.example.deeplink1;end">click here</a>.</p>
+    <p>If the app doesn't open automatically, <a id="deeplink" href="#">click here</a>.</p>
+
+    <script type="text/javascript">
+        // Also update the fallback link in case the app doesn't open automatically
+        var fallbackLink = "intent://derocket.github.io/Deeplink/" + (deeplinkData || "") + "#Intent;scheme=https;package=com.example.deeplink1;end";
+        document.getElementById("deeplink").href = fallbackLink;
+    </script>
 </body>
 </html>
