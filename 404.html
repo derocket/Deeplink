@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found</title>
+</head>
+<body>
+    <h1>404 - Page Not Found</h1>
+    <p>The page you are looking for does not exist. Redirecting to the app...</p>
+
+    <script type="text/javascript">
+        // Get the full URL of the current page
+        var fullUrl = window.location.href;
+
+        // Extract the part of the URL after the last slash
+        var parts = fullUrl.split('/');
+        var lastPart = parts.pop() || parts.pop();  // handle potential trailing slash
+
+        // Construct the intent URL with the extracted data
+        if (lastPart) {
+            window.location.href = "intent://derocket.github.io/Deeplink/" + lastPart + "#Intent;scheme=https;package=com.example.deeplink1;end";
+        } else {
+            // Fallback if no data found after the last slash
+            window.location.href = "intent://derocket.github.io/Deeplink#Intent;scheme=https;package=com.example.deeplink1;end";
+        }
+    </script>
+
+    <p>If the app doesn't open automatically, <a id="deeplink" href="#">click here</a>.</p>
+
+    <script type="text/javascript">
+        // Update the fallback link in case the app doesn't open automatically
+        var fallbackLink = "intent://derocket.github.io/Deeplink/" + (lastPart || "") + "#Intent;scheme=https;package=com.example.deeplink1;end";
+        document.getElementById("deeplink").href = fallbackLink;
+    </script>
+</body>
+</html>
