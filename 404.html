@@ -16,12 +16,17 @@
         // Extract the part of the URL after the last slash
         var parts = fullUrl.split('/');
         var lastPart = parts.pop() || parts.pop();  // handle potential trailing slash
+        var secondLastPart = parts.pop(); // Get the part before the last one
 
-        // Construct the intent URL with the extracted data
-        if (lastPart) {
+        // Determine the type of link (Profile or Post)
+        if (secondLastPart.toLowerCase() === "profile") {
+            // Redirect to Profile deeplink
             window.location.href = "intent://orbitxsocial.netlify.app/profile/" + lastPart + "#Intent;scheme=https;package=com.example.orbitx;end";
+        } else if (secondLastPart.toLowerCase() === "posts") {
+            // Redirect to Post deeplink
+            window.location.href = "intent://orbitxsocial.netlify.app/posts/" + lastPart + "#Intent;scheme=https;package=com.example.orbitx;end";
         } else {
-            // Fallback if no data found after the last slash
+            // Fallback if the path is not recognized
             window.location.href = "intent://orbitxsocial.netlify.app/profile#Intent;scheme=https;package=com.example.orbitx;end";
         }
     </script>
@@ -30,7 +35,6 @@
 
     <script type="text/javascript">
         // Update the fallback link in case the app doesn't open automatically
-        //https://orbitxsocial.netlify.app/profile/
         var fallbackLink = "intent://orbitxsocial.netlify.app/profile/" + (lastPart || "") + "#Intent;scheme=https;package=com.example.orbitx;end";
         document.getElementById("deeplink").href = fallbackLink;
     </script>
