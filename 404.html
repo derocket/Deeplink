@@ -3,38 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found</title>
+    <title>OrbitX link</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            max-width: 150px;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #1e88e5;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        a {
+            color: #1e88e5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Please install the OrbitX App to open this link</h1>
-    <p>The page you are looking for does not exist. Redirecting to the app...</p>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="OrbitX Logo">
+        </div>
+        <h1>Please install the OrbitX App to open this link</h1>
+        <p> Redirecting to the app...</p>
+        <p>If the app doesn't open automatically, <a id="deeplink" href="#">click here</a>.</p>
+    </div>
 
     <script type="text/javascript">
-        // Get the full URL of the current page
+        
         var fullUrl = window.location.href;
 
-        // Extract the part of the URL after the last slash
+        
         var parts = fullUrl.split('/');
-        var lastPart = parts.pop() || parts.pop();  // handle potential trailing slash
-        var secondLastPart = parts.pop(); // Get the part before the last one
+        var lastPart = parts.pop() || parts.pop();  
+        var secondLastPart = parts.pop(); 
 
-        // Determine the type of link (Profile or Post)
+        
         if (secondLastPart.toLowerCase() === "profile") {
-            // Redirect to Profile deeplink
+            
             window.location.href = "intent://orbitxsocial.netlify.app/profile/" + lastPart + "#Intent;scheme=https;package=com.example.orbitx;end";
         } else if (secondLastPart.toLowerCase() === "posts") {
-            // Redirect to Post deeplink
-            window.location.href = "intent://orbitxsocial.netlify.app/posts/" + lastPart + "#Intent;scheme=https;package=com.example.orbitx;end";
+         
+           window.location.href = "intent://orbitxsocial.netlify.app/posts/" + lastPart + "#Intent;scheme=https;package=com.example.orbitx;end";
         } else {
-            // Fallback if the path is not recognized
+         
             window.location.href = "intent://orbitxsocial.netlify.app/profile#Intent;scheme=https;package=com.example.orbitx;end";
         }
-    </script>
-
-    <p>If the app doesn't open automatically, <a id="deeplink" href="#">click here</a>.</p>
-
-    <script type="text/javascript">
-        // Update the fallback link in case the app doesn't open automatically
         var fallbackLink = "intent://orbitxsocial.netlify.app/profile/" + (lastPart || "") + "#Intent;scheme=https;package=com.example.orbitx;end";
         document.getElementById("deeplink").href = fallbackLink;
     </script>
